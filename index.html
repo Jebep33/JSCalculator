@@ -4,30 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Calculator</title>
-    
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <div class="label"></div>
+
+        <div class="label">
+            <input type="text" id="numbers">
+        </div>
+
         <div class="buttons">
-            <button id="one">1</button>
-            <button id="two">2</button>
-            <button id="three">3</button>
-            <button id="divide">/</button>
-            <button id="four">4</button>
-            <button id="five">5</button>
-            <button id="six">6</button>
-            <button id="times">*</button>
-            <button id="seven">7</button>
-            <button id="eight">8</button>
-            <button id="nine">9</button>
-            <button id="minus">-</button>
-            <button id="zero">0</button>
-            <button id="dot">.</button>
-            <button id="equals">=</button>
-            <button id="plus">+</button>
+
+            <div class="rows">
+                <button id="one">1</button>
+                <button id="two">2</button>
+                <button id="three">3</button>
+                <button id="divide">/</button>
+            </div>
+            
+            <div class="rows">
+                <button id="four">4</button>
+                <button id="five">5</button>
+                <button id="six">6</button>
+                <button id="times">*</button>
+            </div>
+            
+            <div class="rows">
+                <button id="seven">7</button>
+                <button id="eight">8</button>
+                <button id="nine">9</button>
+                <button id="minus">-</button>
+            </div>
+            
+            <div class="rows">
+                <button id="zero">0</button>
+                <button id="dot">.</button>
+                <button id="equals">=</button>
+                <button id="plus">+</button>
+            </div>
+            
         </div>
     </div>
+
     <script src="calculate.js"></script>
+
 </body>
 </html>

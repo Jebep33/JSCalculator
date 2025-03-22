@@ -1,0 +1,38 @@
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    
+}
+
+.container{
+    justify-content: center;
+    align-items: center;
+    border: 3px solid black;
+    padding: 32px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.rows{
+    margin: 16px;
+    display: flex;
+    gap: 16px;
+}
+
+button{
+    padding: 4px 16px;
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.label{
+    width: 100%;
+}
+
+input{
+    width: 100%;
+    padding: 6px 4px;
+    text-align: right;
+}
