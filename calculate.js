@@ -1,11 +1,5 @@
 var num1, num2, operation;
 
-const button = document.querySelectorAll(button);
-
-
-    
-;
-
 function add(a,b){
     return a+b;
 }
