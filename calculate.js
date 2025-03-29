@@ -1,7 +1,20 @@
-var num1, num2, operation;
+var num1, num2, operation,result=0;
 let buttons = document.querySelectorAll("button");
 let input = document.querySelector("input");
 let operationClicked = false;
+
+/*
+TO DO
+1. Create a condition - operationClicked is TRUE, and any operation is clicked again
+    - perform operation with current numbers
+    - store value in num1
+    - display num1 in input box
+2. If equals is clicked, num1 is not empty, operationClicked is true
+    - perform operation as normal
+    - clear all values and input
+3. If equals is clicked - num1 is empty, operationClicked is false
+    - return an error
+*/ 
 
 buttons.forEach(button => {
     button.addEventListener("click",event => {
@@ -18,11 +31,34 @@ buttons.forEach(button => {
             case ('zero'): appendString('0'); break;
             case ('dot'): appendString('.'); break;
             case ('plus'): 
+                storeValue(input.value);
+                operation = "add";
+                console.log(`${num1},${operationClicked},${operation}`);
+                break;
             case ('times'):
+                storeValue(input.value);
+                operation = "multiply";
+                console.log(`${num1},${operationClicked},${operation}`);
+                break;
             case ('divide'):
+                storeValue(input.value);
+                operation = "divide";
+                console.log(`${num1},${operationClicked},${operation}`);
+                break;
             case ('minus'):
                 storeValue(input.value);
-                console.log(`${num1},${operationClicked}`);
+                operation = "subtract";
+                console.log(`${num1},${operationClicked},${operation}`);
+                break;
+            case ('equals'): 
+                if(isEmpty()){
+                    alert('Please input value.');
+                }
+                else{
+                    num2 = parseInt(input.value);
+                    result = operate(num1,operation,num2);
+                    input.value = result;
+                }
                 break;
             default: alert("Invalid"); break;
         }
@@ -45,14 +81,17 @@ function divide(a,b){
     return a/b;
 }
 
-function operate(num1,operation,num2){
+function operate(var1,operation,var2){
+    let outcome = 0;
+    
     switch(operation){
-        case '+': add(num1,num2); break;
-        case '-': subtract(num1,num2); break;
-        case '*': multiply(num1,num2); break;
-        case '/': divide(num1,num2); break;
+        case 'add': outcome = add(var1,var2); break;
+        case 'subtract': outcome = subtract(var1,var2); break;
+        case 'multiply': outcome = multiply(var1,var2); break;
+        case 'divide': outcome = divide(var1,var2); break;
         default: alert("Invalid!");
     }
+    return outcome;
 }
 
 function appendString(stringToAppend){
@@ -60,7 +99,19 @@ function appendString(stringToAppend){
 }
 
 function storeValue(value){
+    if (isEmpty()){
+        alert('Please input value.');
+    }
+    else{
+        operationClicked = true;
+    }
     num1 = parseInt(value);
     input.value = "";
-    operationClicked = true;
+}
+
+function isEmpty (){
+    if (input.value == null || input.value == NaN || input.value == "" || input.value == undefined){
+        return true;
+    }
+    else return false;
 }
