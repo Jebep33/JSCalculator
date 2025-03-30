@@ -1,4 +1,4 @@
-var num1, num2, operation,result=0;
+var num1=0, num2=0, operation,result=0;
 let buttons = document.querySelectorAll("button");
 let input = document.querySelector("input");
 let operationClicked = false;
@@ -12,6 +12,7 @@ TO DO
 2. If equals is clicked, num1 is not empty, operationClicked is true
     - perform operation as normal
     - clear all values and input
+    - display result in the input
 3. If equals is clicked - num1 is empty, operationClicked is false
     - return an error
 */ 
@@ -19,10 +20,18 @@ TO DO
 buttons.forEach(button => {
     button.addEventListener("click",event => {
         switch(event.target.id){
-            case ('one'): appendString('1'); break;
-            case ('two'): appendString('2'); break;
-            case ('three'): appendString('3'); break;
-            case ('four'): appendString('4'); break;
+            case ('one'): 
+                appendString('1'); 
+                break;
+            case ('two'): 
+                appendString('2');
+                break;
+            case ('three'): 
+                appendString('3');
+                break;
+            case ('four'): 
+                appendString('4');
+                break;
             case ('five'): appendString('5'); break;
             case ('six'): appendString('6'); break;
             case ('seven'): appendString('7'); break;
@@ -31,34 +40,38 @@ buttons.forEach(button => {
             case ('zero'): appendString('0'); break;
             case ('dot'): appendString('.'); break;
             case ('plus'): 
-                storeValue(input.value);
+                storeValue();
+                if(num2 !== 0){
+                    equals();
+                }
                 operation = "add";
-                console.log(`${num1},${operationClicked},${operation}`);
                 break;
             case ('times'):
-                storeValue(input.value);
+                storeValue();
+                if(num2 !== 0){
+                    equals();
+                }
                 operation = "multiply";
-                console.log(`${num1},${operationClicked},${operation}`);
                 break;
             case ('divide'):
-                storeValue(input.value);
+                storeValue();
+                if(num2 !== 0){
+                    equals();
+                }
                 operation = "divide";
-                console.log(`${num1},${operationClicked},${operation}`);
                 break;
             case ('minus'):
-                storeValue(input.value);
+                storeValue();
+                if(num2 !== 0){
+                    equals();
+                }
                 operation = "subtract";
-                console.log(`${num1},${operationClicked},${operation}`);
                 break;
             case ('equals'): 
-                if(isEmpty()){
-                    alert('Please input value.');
-                }
-                else{
-                    num2 = parseInt(input.value);
-                    result = operate(num1,operation,num2);
-                    input.value = result;
-                }
+                storeValue();
+                equals();
+                operationClicked = false;
+                num1=0;
                 break;
             default: alert("Invalid"); break;
         }
@@ -95,18 +108,22 @@ function operate(var1,operation,var2){
 }
 
 function appendString(stringToAppend){
+    resetInput();
     input.value = input.value + stringToAppend;
 }
 
-function storeValue(value){
-    if (isEmpty()){
+function storeValue(){
+    if(isEmpty()){
         alert('Please input value.');
     }
-    else{
-        operationClicked = true;
+    else if(num1 !== 0 && num2 === 0){
+        num2 = parseInt(input.value);
     }
-    num1 = parseInt(value);
-    input.value = "";
+    else if(num1 === 0){
+        num1 = parseInt(input.value);
+    }
+    else alert("Invalid.");
+    operationClicked = true;
 }
 
 function isEmpty (){
@@ -114,4 +131,18 @@ function isEmpty (){
         return true;
     }
     else return false;
+}
+
+function equals(){
+    result = operate(num1,operation,num2);
+    num1 = result;
+    input.value = result;
+    num2 = 0;
+}
+
+function resetInput(){
+    if(operationClicked && num2 === 0){
+        input.value = "";
+        operationClicked = false;
+    }
 }
